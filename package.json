@@ -1,0 +1,12 @@
+{
+  "name": "card-of-the-day-api",
+  "author": "Alessandro Braidotti",
+  "email": "alessandro.braidotti@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abraidotti/cotd-api"
+  },
+  "version": "0.1.0",
+  "private": false
+}
