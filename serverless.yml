@@ -2,6 +2,7 @@ service: cotd-api
 
 plugins:
   - serverless-domain-manager
+  - serverless-dotenv-plugin
 
 custom:
   customDomain:
