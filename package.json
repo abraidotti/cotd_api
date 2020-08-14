@@ -8,5 +8,9 @@
     "url": "https://github.com/abraidotti/cotd-api"
   },
   "version": "0.1.0",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "serverless-domain-manager": "^4.2.0",
+    "serverless-dotenv-plugin": "^3.0.0"
+  }
 }

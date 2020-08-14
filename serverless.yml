@@ -1,6 +1,14 @@
 service: cotd-api
 
+plugins:
+  - serverless-domain-manager
+
 custom:
+  customDomain:
+    domainName: ${env:DOMAIN}
+    basePath: ""
+    stage: ${self:provider.stage}
+    createRoute53Record: true
   myStage: ${opt:stage, self:provider.stage}
   tableName: "cotd-api-${self:custom.myStage}"
 
@@ -70,7 +78,7 @@ resources:
   Resources:
     cotdsDynamoDbTable:
       Type: "AWS::DynamoDB::Table"
-      DeletionPolicy: Retain
+      DeletionPolicy: Delete
       Properties:
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
         AttributeDefinitions:

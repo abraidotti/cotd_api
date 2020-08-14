@@ -1,8 +1,16 @@
-# port-scanner-api
+# Card of the Day (cotd) API
 
-WIP
+Just your basic CRUD API -- get a card of the day, save some text with one, see a list of all your cards.
 
-## Context
+## Requirements
+
+- Node/NPM
+
+- the AWS CLI
+
+- the Serverless CLI
+
+- (Easily optional) - your own domain and an AWS certificate for the domain or wildcard subdomain
 
 ## Setup
 
@@ -12,50 +20,56 @@ npm install
 
 ## Deployment
 
-In order to deploy the endpoint simply run:
+Take note of `.env.example`. You'll want to supply a custom domain using this and rename it to `.env`.
+
+Once you have that `.env` file:
 
 ```bash
-serverless deploy --profile XXX
+serverless create_domain --profile=XXX
+```
+
+In order to deploy the endpoints, simply run:
+
+```bash
+serverless deploy --profile=XXX
 ```
 
 ## Usage
 
 You can create, retrieve, update, or delete scans with the following commands:
 
-### Create a scan
+### Create a cotd
 
 ```bash
-curl -X POST https://XXXXXXXXXX.execute-api.us-east-1.amazonaws.com/main/scans -H "x-api-key: XXX" --data "{ ""text"": ""This is a scan."", ""user_id"": ""555"" }"
-
+curl -X POST <your CREATE endpoint> -H "x-api-key: XXX"
 ```
 
-No output
 
-### List all scans
+### Update a cotd
 
 ```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/scans
+curl -X POST <your UPDATE endpoint> -H "x-api-key: XXX" --data "{ ""text"": ""This is a note for this card."" }"
 ```
 
-### Get one scan
+### Get one/all cotd
 
 ```bash
-# Replace the <id> part with a real id from your scans table
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/scans/<id>
+curl <your GET endpoint> -H "x-api-key: XXX"
+curl <your GET ALL endpoint> -H "x-api-key: XXX"
 ```
 
-### Update a scan
+### Delete a cotd
 
 ```bash
-# Replace the <id> part with a real id from your scans table
-curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/scans/<id> --data "{ ""text"": ""This is a new scan."", ""user_id"": ""555"" }"
+curl <your DELETE endpoint> -H "x-api-key: XXX"
 ```
 
-### Delete a scan
+## Teardown
+
+You'll want to run
 
 ```bash
-# Replace the <id> part with a real id from your scans table
-curl -X DELETE https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/scans/<id>
+serverless remove --profile=XXX
 ```
 
-No output
+And don't forget to manually delete the custom domain in APIGateway and the A and AAAA records in Route 53
